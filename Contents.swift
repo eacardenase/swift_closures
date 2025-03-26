@@ -111,3 +111,23 @@ let estimatedParticipation = passingAverages.reduce(5) { partialResult, curr in
 
 let finalStimate = volunteerAverage.map { Int($0.rounded()) }.filter { $0 > 10 }.reduce(5) { $0 + $1 }
 print(finalStimate)
+
+//func makeCharacterRemover(for character: Character) -> (String) -> String {
+//    return {
+//        return $0.filter { $0 != character }
+//    }
+//}
+
+func makeCharacterRemover(for character: Character) -> (String) -> String {
+    { $0.filter { $0 != character } }
+}
+
+func remove(_ character: Character, from string: String) -> String {
+    string.filter { $0 != character }
+}
+
+let removeLowerCaseLs = makeCharacterRemover(for: "l")
+let strangeGreeting = removeLowerCaseLs("Hello, World!") // "Heo, Word!"
+
+let removeLowerCaseOs = makeCharacterRemover(for: "o")
+let strangerGreeting = removeLowerCaseOs(strangeGreeting) // "He, Wrd!"
